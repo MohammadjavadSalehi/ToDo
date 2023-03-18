@@ -2,9 +2,9 @@ import {useEffect, useState} from "react"
 function App() {
   const [todos,setTodos] = useState([])
   const [input,setInput] = useState("")
-
+  // http://localhost:5000/todo
   useEffect(()=>{
-    fetch("http://localhost:5000/todo").then((res)=>{return res.json()})
+    fetch("https://todo-maee.onrender.com/todo").then((res)=>{return res.json()})
     .then((data)=>{
       setTodos(data)
     })
@@ -12,7 +12,7 @@ function App() {
   function handleSubmit(e){
     e.preventDefault()
     if(input){
-      fetch("http://localhost:5000/todo/save",{
+      fetch("https://todo-maee.onrender.com/todo/save",{
         body:JSON.stringify({text:input}),
         headers:{
           "Content-Type":"application/json"
@@ -25,7 +25,7 @@ function App() {
     }
   }
   function handleDelete(id){
-    fetch(`http://localhost:5000/todo/${id}`,{
+    fetch(`https://todo-maee.onrender.com/todo/${id}`,{
         method:"DELETE"
       }).then((res)=>{return res.json()}).then((data)=>{
         const temp = todos.filter((todo)=>{
@@ -37,7 +37,7 @@ function App() {
   function handleEdit(id){
     const newText = prompt("enter new text: ")
     if(newText){
-      fetch(`http://localhost:5000/todo/${id}`,{
+      fetch(`https://todo-maee.onrender.com/todo/${id}`,{
         method:"PUT",
         body:JSON.stringify({text:newText}),
         headers:{
