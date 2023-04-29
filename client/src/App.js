@@ -56,24 +56,45 @@ function App() {
 
   }
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={input} onChange={(e)=>{
-          setInput(e.target.value)
-        }} />
-        <button type="submit">Create Todo</button>
+    <div className="flex flex-col items-center mt-8">
+      <form className="flex mb-4" onSubmit={handleSubmit}>
+        <input
+          className="px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          className="font-bold px-4 py-2 rounded-r-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          type="submit"
+        >
+          Create Todo
+        </button>
       </form>
-      {
-        todos?.map((todo)=>{
-          return(
-            <div key={todo._id}>
-            <p>{todo.text}</p>
-            <button onClick={()=>handleDelete(todo._id)}>Delete</button>
-            <button onClick={()=>handleEdit(todo._id)}>Edit</button>
+      {todos?.map((todo) => {
+        return (
+          <div
+            className="flex justify-between items-center bg-white p-4 rounded-md shadow-sm w-80 mb-2"
+            key={todo._id}
+          >
+            <p className="text-lg">{todo.text}</p>
+            <div className="flex">
+              <button
+                className="px-2 py-1 mr-2 rounded-md bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                onClick={() => handleDelete(todo._id)}
+              >
+                Delete
+              </button>
+              <button
+                className="px-2 py-1 rounded-md bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                onClick={() => handleEdit(todo._id)}
+              >
+                Edit
+              </button>
             </div>
-          )
-        })
-      }
+          </div>
+        );
+      })}
     </div>
   );
 }
